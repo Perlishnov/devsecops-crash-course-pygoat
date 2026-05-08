@@ -5,8 +5,6 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN python -m pip install --no-cache-dir pip==25.0
-
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt gunicorn==23.0.0
 
