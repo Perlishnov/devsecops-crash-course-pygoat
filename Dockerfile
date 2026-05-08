@@ -1,35 +1,17 @@
-FROM python:3.11-slim
+FROM python:3.11.13-slim-bookworm
 
-# set work directory
 WORKDIR /app
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_INPUT=1
+ENV PIP_PROGRESS_BAR=off
 
-# dependencies for psycopg2
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    dnsutils \
-    libpq-dev \
-    python3-dev \
-  && rm -rf /var/lib/apt/lists/*
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-
-# Install dependencies
-RUN python -m pip install --no-cache-dir pip==22.0.4
 COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt gunicorn==23.0.0
 
-
-# copy project
 COPY . /app/
 
-
-# install pygoat
 EXPOSE 8000
-
-
-RUN python3 /app/manage.py migrate
-WORKDIR /app/pygoat/
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers","6", "pygoat.wsgi"]
