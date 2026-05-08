@@ -4,6 +4,9 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_INPUT=1
+ENV PIP_PROGRESS_BAR=off
 
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt gunicorn==23.0.0
