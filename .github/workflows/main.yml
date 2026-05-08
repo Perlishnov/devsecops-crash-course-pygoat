@@ -50,7 +50,7 @@ jobs:
       - name: Docker Scout Scan
         uses: docker/scout-action@v1.20.4
         with:
-          comand: quickview,cves
+          command: quickview,cves
           image: myapp:latest
           
   
