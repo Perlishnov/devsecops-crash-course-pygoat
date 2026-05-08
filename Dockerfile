@@ -9,9 +9,6 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean
 
 # Runtime/build dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    dnsutils \
-    gcc \
-    libc6-dev \
     libpq-dev \
   && rm -rf /var/lib/apt/lists/*
 
