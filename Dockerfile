@@ -20,7 +20,7 @@ ENV PYTHONUNBUFFERED=1
 
 
 # Install dependencies
-RUN python -m pip install --no-cache-dir --upgrade pip
+RUN python -m pip install --no-cache-dir pip==25.0
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt gunicorn==23.0.0
 
